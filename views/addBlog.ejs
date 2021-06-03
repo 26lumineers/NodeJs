@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/classic/ckeditor.js"></script>
+  </head>
+  <body>
+    <%- include layout %>
+    <div class="container">
+      <h1 align="center">เขียนบทความ</h1>
+      <%- messages() %>
+          <% if(locals.errors){ %>
+            <ul class="alert alert-danger">
+          <% Object.values(errors).forEach(function(error){ %>
+            <li><%= error.msg %></li>
+          <%}) %>
+         </ul>
+          <%}%>
+
+  
+      <form action="/blog/add" method="POST">
+        <div class="from-group">
+          <label for="">ชื่อบทความ</label>
+          <input class="form-control" type="text" name="article" id="" />
+        </div>
+        <div class="from-group">
+          <label for="">รายละเอียด</label>
+          <textarea class="form-control" name="description" id="description" cols="80" rows="8"></textarea>
+        </div>
+        <div class="from-group">
+            <label for="">ผู้แต่ง</label>
+            <input class="form-control" type="text" name="author" id="" />
+          </div>
+        <input type="submit" value="บันทึก" class="btn btn-primary">
+      </form>
+    </div>
+    <script>
+     
+        ClassicEditor
+            .create( document.querySelector( '#description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+            $(function(){
+                $('#messages').addClass('alert alert-success');
+            })
+    </script>
+  </body>
+</html>
